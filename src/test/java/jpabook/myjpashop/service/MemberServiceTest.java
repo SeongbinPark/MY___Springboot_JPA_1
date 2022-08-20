@@ -2,21 +2,16 @@ package jpabook.myjpashop.service;
 
 import jpabook.myjpashop.domain.Member;
 import jpabook.myjpashop.repository.MemberRepository;
-import org.assertj.core.api.Assertions;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringRunner;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.persistence.DiscriminatorValue;
-import java.util.List;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -29,7 +24,7 @@ public class MemberServiceTest {
     MemberRepository memberRepository;
 
     @Test
-    @Rollback(value = false)
+//    @Rollback(value = false)
     @DisplayName("회원 가입")
     public void joinTest() throws Exception {
         //given
