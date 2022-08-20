@@ -3,7 +3,6 @@ package jpabook.myjpashop.domain;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.aspectj.weaver.ast.Or;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
@@ -41,7 +40,7 @@ public class Order {
     /**
      * 생성메서드
      */
-    public Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
+    public static Order createOrder(Member member, Delivery delivery, OrderItem... orderItems) {
         Order order = new Order();
         order.setDelivery(delivery);
         order.setMember(member);
@@ -52,6 +51,35 @@ public class Order {
         order.setOrderDate(LocalDateTime.now());
         return order;
     }
+
+    /**
+     * 주문 취소
+     */
+    public void cancel() {
+        if (delivery.getDeliveryStatus() == DeliveryStatus.COMP) {
+            throw new IllegalStateException("배송완료 상품은 취소불가");
+        }
+        this.setStatus(OrderStatus.CANCEL);
+        for (OrderItem orderItem : orderItems) {
+            orderItem.cancel();
+        }
+    }
+
+    /**
+     * 조회 로직
+     */
+    public int getTotal() {
+        return orderItems.stream().mapToInt(OrderItem::getTotal).sum();
+
+        //원래
+        //int total=0;
+        //for (OrderItem orderItem : orderItems){
+        //total+=orderItem.getTotal();
+        //}
+        //return total;
+    }
+
+
 
 
     /**
