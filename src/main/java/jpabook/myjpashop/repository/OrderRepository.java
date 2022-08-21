@@ -94,7 +94,9 @@ public class OrderRepository {
             criteria.add(name);
 
         }
-        cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));     TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
-        return query.getResultList(); }
+        cq.where(cb.and(criteria.toArray(new Predicate[criteria.size()])));
+        TypedQuery<Order> query = em.createQuery(cq).setMaxResults(1000); //최대 1000건
+        return query.getResultList();
     }
+}
 //-> 해결법 : 쿼리 DSL(동적쿼리에 강력한 기능, 정적쿼리도 길어지면 DSL)

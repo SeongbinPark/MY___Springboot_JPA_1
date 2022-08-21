@@ -53,6 +53,7 @@ public class OrderService {
     }
 
     //주문 취소
+    @Transactional
     public void cancelOrder(Long orderId) {
         Order order = orderRepository.findOne(orderId);
         order.cancel();
