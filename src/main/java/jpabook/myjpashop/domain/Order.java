@@ -59,7 +59,7 @@ public class Order {
      * 주문 취소
      */
     public void cancel() {
-        if (delivery.getDeliveryStatus() == DeliveryStatus.COMP) {
+        if (this.delivery.getDeliveryStatus() == DeliveryStatus.COMP) {
             throw new IllegalStateException("배송완료 상품은 취소불가");
         }
         this.setStatus(OrderStatus.CANCEL);

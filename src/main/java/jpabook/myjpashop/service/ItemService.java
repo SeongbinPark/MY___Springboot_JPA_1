@@ -1,5 +1,6 @@
 package jpabook.myjpashop.service;
 
+import jpabook.myjpashop.domain.item.Book;
 import jpabook.myjpashop.domain.item.Item;
 import jpabook.myjpashop.repository.ItemRepository;
 import lombok.RequiredArgsConstructor;
@@ -18,6 +19,16 @@ public class ItemService {
     @Transactional
     public void saveItem(Item item) {
         itemRepository.save(item);
+    }
+
+    @Transactional
+    public void updateItem(Long itemId, Book param) {
+
+        Item findItem = itemRepository.findOne(itemId);
+        //em.find올 찾아온 객체는 영속상태이다 -> 리턴된 findItem도 영속상태객체를 가리킨다.
+        findItem.change( param);
+
+        //persist 안해도 됨
     }
 
     public List<Item> findItems() {

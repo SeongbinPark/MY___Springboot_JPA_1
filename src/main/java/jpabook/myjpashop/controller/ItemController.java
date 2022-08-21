@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import java.util.List;
+
 @Controller
 @RequiredArgsConstructor
 public class ItemController {
@@ -32,6 +34,14 @@ public class ItemController {
         return "redirect:/";
     }
 
+    @GetMapping("/items")//상품목록 만들어야됨.
+    public String list(Model model) {
+        List<Item> items = itemService.findItems();
+        model.addAttribute("items", items);
+        return "/items/itemList";
+    }
+
+
     @GetMapping("/items/{itemId}/edit")
     public String updateItemForm(@PathVariable Long itemId, Model model) {
         Book item = (Book) itemService.findOne(itemId);
@@ -44,7 +54,7 @@ public class ItemController {
     @PostMapping("/items/{itemId}/edit")
     public String updateItem(@ModelAttribute BookForm form) {
         Book book = Book.createBook(form);
-        itemService.saveItem(book);
+        itemService.saveItem(book);//book은 준영속 엔티티 이므로 직접 persist
         return "redirect:/";
     }
 }

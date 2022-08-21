@@ -5,7 +5,6 @@ import jpabook.myjpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -33,7 +32,7 @@ public class MemberService {
         return memberRepository.find(memberId);
     }
 
-    public List<Member> findAll() {
+    public List<Member> findmembers() {
         return memberRepository.findAll();
     }
 

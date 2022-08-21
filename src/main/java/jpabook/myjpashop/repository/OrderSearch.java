@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
+//주문내역 확인 시 이용.
 public class OrderSearch {
 
     private String memberName;//회원이름
